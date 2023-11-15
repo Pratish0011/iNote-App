@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserFailure, updateUserStart, updateUserSuccess } from "../redux/userSlice/userSlice";
+import { signoutUserStart,signoutUserFailure, signoutUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from "../redux/userSlice/userSlice";
+import {useNavigate} from 'react-router-dom'
 
 function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -8,6 +9,7 @@ function Profile() {
   const fileRef = useRef();
   const [edit, setEdit] = useState(true);
   const [formData, setFormData] = useState({});
+  const navigate = useNavigate()
 
   function handleChange() {
     setFormData({
@@ -43,6 +45,22 @@ function Profile() {
 
     } catch (error) {
        dispatch(updateUserFailure(error.message))
+    }
+  }
+
+  async function handleLogout(){
+    try {
+      dispatch(signoutUserStart())
+      const res = await fetch(`api/auth/sign-out`)
+      const data = await res.json()
+      if(data.success === false){
+        dispatch(signoutUserFailure(data.message))
+      }
+      dispatch(signoutUserSuccess(data))
+      navigate('/sign-in')
+    } catch (error) {
+      dispatch(signoutUserFailure(error.message))
+    
     }
   }
 
@@ -97,6 +115,13 @@ function Profile() {
               {
                 loading? "Updating...": "Update"
               }
+            </button>
+            <button
+            type="button"
+              onClick={handleLogout}
+              className="bg-red-600 text-white px-4 py-2 rounded-lg text-xl font-semibold "
+            >
+             Log Out
             </button>
           </div>
         </form>

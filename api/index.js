@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import noteRouter from './routes/notes.route.js'
 import authRouter from './routes/auth.route.js'
 import userRouter from './routes/user.route.js'
+import cookieParser from 'cookie-parser'
 import path from 'path'
 
 dotenv.config()
@@ -24,6 +25,7 @@ const __dirname = path.resolve();
 const app = express()
 
 app.use(express.json())
+app.use(cookieParser());
 
 app.listen(process.env.PORT,()=>{
   console.log(`Server is running on port ${process.env.PORT}`)
