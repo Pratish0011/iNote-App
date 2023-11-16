@@ -11,7 +11,7 @@ function Profile() {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate()
 
-  function handleChange() {
+  function handleChange(e) {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
@@ -36,7 +36,7 @@ function Profile() {
       })
 
         const data = await res.json()
-
+        console.log(data);
         if(data.success === false){
           dispatch(updateUserFailure(data))
         }

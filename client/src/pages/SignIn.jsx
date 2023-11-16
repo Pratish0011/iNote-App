@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {Link, useNavigate} from "react-router-dom"
 import { signInStart,signInSuccess,signInFailure } from '../redux/userSlice/userSlice'
-// import OAuth from '../components/OAuth'
+import GoogleAuth from '../components/GoogleAuth'
+
 
 
 
@@ -65,7 +66,7 @@ async function handleSubmit(e){
          <button disabled={loading} type='submit' className='bg-slate-700 text-white p-3
          rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
            {loading? "loading...":"Sign In"}</button>
-           {/* <OAuth/> */}
+          <GoogleAuth/>
       </form>
       <div className="flex gap-2 mt-5">
        <p>Create an account?</p>
