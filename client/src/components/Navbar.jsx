@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 function Navbar() {
 
   const {currentUser} = useSelector(state => state.user)
-  console.log(currentUser);
 
   return (
     <div className='flex justify-between items-center bg-myColor px-12 lg:px-24 py-4'>
@@ -27,10 +26,10 @@ function Navbar() {
           (
             <div className="flex gap-4 items-center font-semibold text-2xl">
              <Link to={'/sign-up'}>
-           <button className=''>SignUp</button>
+           <button className='bg-slate-700 text-base px-4 py-2 rounded-lg text-white hover:shadow-lg'>SignUp</button>
            </Link>
              <Link to={'/sign-in'}>
-           <button className=''>SignIn</button>
+           <button className='bg-slate-100 text-base px-4 py-2 rounded-lg text-black hover:shadow-lg'>SignIn</button>
            </Link>
         </div>
            )
