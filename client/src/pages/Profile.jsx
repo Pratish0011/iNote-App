@@ -42,6 +42,7 @@ function Profile() {
         }
 
         dispatch(updateUserSuccess(data))
+        setEdit(true)
 
     } catch (error) {
        dispatch(updateUserFailure(error.message))
