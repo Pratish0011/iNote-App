@@ -14,7 +14,7 @@ function Navbar() {
           </Link>
         </div>
          {
-           currentUser.avatar ? 
+           currentUser ? 
            (
              <Link to={'/profile'}>
               <div className="flex gap-4 items-center font-semibold text-2xl">

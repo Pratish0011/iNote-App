@@ -7,6 +7,7 @@ import Profile from './pages/Profile'
 import Navbar from './components/Navbar'
 import AddNote from './pages/AddNote'
 import Note from './pages/Note'
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
@@ -16,9 +17,26 @@ function App() {
           <Route path='/sign-up' element={<SignUp/>}/>
           <Route path='/sign-in' element={<SignIn/>}/>
           <Route path='/' element={<Home/>}/>
+
+          {/* <Route element={<PrivateRoute/>}>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/add-note' element={<AddNote/>}/>
           <Route path='/note/:noteId' element={<Note/>}/>
+          </Route> */}
+
+        <Route
+          path='/profile'
+          element={<PrivateRoute element={<Profile />} />}
+        />
+        <Route
+          path='/add-note'
+          element={<PrivateRoute element={<AddNote />} />}
+        />
+        <Route
+          path='/note/:noteId'
+          element={<PrivateRoute element={<Note />} />}
+        />
+
       </Routes>
     </BrowserRouter>
   )

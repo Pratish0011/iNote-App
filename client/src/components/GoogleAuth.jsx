@@ -3,7 +3,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { signInSuccess } from '../redux/userSlice/userSlice';
+import { signInFailure, signInStart, signInSuccess } from '../redux/userSlice/userSlice';
 
 
 
@@ -13,6 +13,7 @@ function GoogleAuth() {
 
 async function handleGoogleClick(){
 try {
+    dispatch(signInStart())
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth,provider)
     console.log(result);
@@ -28,6 +29,9 @@ try {
         })
     })
         const data = await res.json()
+        if(data.success === false){
+            dispatch(signInFailure(data.message))
+        }
         dispatch(signInSuccess(data))
         navigate('/')
 } catch (error) {
