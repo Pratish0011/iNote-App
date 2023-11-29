@@ -56,6 +56,25 @@ async function handleSubmit (e){
         setLoading(false)
     }
 }
+
+
+async function handleDelete(e){
+  e.preventDefault()
+  try {
+     const res = await fetch(`/api/notes/deleteNote/${params.noteId}`,{
+      method: 'DELETE',
+     })
+     const data = await res.json()
+     console.log(data)
+     navigate('/')
+
+  } catch (error) {
+    setError(error.message)
+  }
+
+}
+
+
 useEffect(()=>{
 const fetchNoteData = async() =>{
     try {
@@ -102,6 +121,9 @@ fetchNoteData()
         <button onClick={handleEdit} type="submit" className="w-64 bg-slate-700 text-white py-2 rounded-lg text-2xl font-semibold">
         Edit
           
+          </button>
+        <button onClick={handleDelete} type="submit" className="w-64 bg-red-700 text-white py-2 rounded-lg text-2xl font-semibold">
+        Delete 
           </button>
         <button disabled={loading} type='submit' className="w-64 bg-slate-700 text-white py-2 rounded-lg text-2xl font-semibold">
           {

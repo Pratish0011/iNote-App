@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 function Home() {
  
 const {currentUser} = useSelector(state=> state.user)
+console.log(currentUser._id);
 const [noteData, setNoteData] = useState([])
 const [error, setError] = useState(null)
 
@@ -16,12 +17,12 @@ const fetchUserNotes = async()=>{
 try {
 const res = await fetch(`/api/notes/getNotes/${currentUser._id}`)
 const data = await res.json()
+console.log(data)
 if (data.success === false) {
   setError(data.message);
   return;
 }
 setNoteData(data)
-console.log(data)
 
 } catch (error) {
   setError(error);

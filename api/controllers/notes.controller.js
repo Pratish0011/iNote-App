@@ -54,3 +54,19 @@ export const getNote = async(req, res, next)=>{
       next(error)
    }
 }
+
+export const deleteNote = async(req, res, next)=>{
+   const note = await Note.findById(req.params.id)
+    if(!note){
+        return next(errorHandler(404,'Note not found'))
+    }
+    if (req.user.id !== note.userRef){
+      return next(errorHandler(401,'You can only delete your note'))
+    }
+   try {
+      await Note.findByIdAndDelete(req.params.id)
+      res.status(200).json({message:'Listing deleted Successfully'})
+   } catch (error) {
+      next(error)
+   }
+}
