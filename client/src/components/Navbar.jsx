@@ -17,8 +17,8 @@ function Navbar() {
            currentUser ? 
            (
              <Link to={'/profile'}>
-              <div className="flex gap-4 items-center font-semibold text-2xl">
-               <img src={currentUser.avatar} alt="" className='w-12 rounded-full' />
+              <div className="flex gap-4 items-center font-semibold text-2xl rounded-full">
+               <img src={currentUser.avatar} alt="" className='w-12 h-12 rounded-full' />
                 <h2>{currentUser.username}</h2>
            </div>
                </Link>

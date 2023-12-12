@@ -17,12 +17,12 @@ const fetchUserNotes = async()=>{
 try {
 const res = await fetch(`/api/notes/getNotes/${currentUser._id}`)
 const data = await res.json()
-console.log(data)
+const revData  = [...data].reverse()
 if (data.success === false) {
   setError(data.message);
   return;
 }
-setNoteData(data)
+setNoteData(revData)
 
 } catch (error) {
   setError(error);
