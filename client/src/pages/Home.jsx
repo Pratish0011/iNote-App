@@ -33,8 +33,7 @@ fetchUserNotes()
 
 
 
-
-  return (
+return (
     <>
     <div className="my-4 flex justify-between max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto p-4">
       <Link to={'/add-note'}>
@@ -73,7 +72,8 @@ fetchUserNotes()
         }
       </div>
       </>
-  );
+  )
+
 }
 
 export default Home;

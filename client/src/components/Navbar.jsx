@@ -9,9 +9,17 @@ function Navbar() {
   return (
     <div className='flex justify-between items-center bg-myColor px-12 lg:px-24 py-4'>
         <div className="font-bold text-2xl">
-          <Link to={'/'}>
+          {
+            currentUser ? (
+              <Link to={'/'}>
           <h1>iNOTE</h1>
           </Link>
+            ):(
+              <Link to={'/sign-in'}>
+              <h1>iNOTE</h1>
+              </Link>
+            )
+          }
         </div>
          {
            currentUser ? 

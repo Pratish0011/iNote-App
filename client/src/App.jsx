@@ -16,13 +16,17 @@ function App() {
       <Routes>
           <Route path='/sign-up' element={<SignUp/>}/>
           <Route path='/sign-in' element={<SignIn/>}/>
-          <Route path='/' element={<Home/>}/>
 
           {/* <Route element={<PrivateRoute/>}>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/add-note' element={<AddNote/>}/>
           <Route path='/note/:noteId' element={<Note/>}/>
-          </Route> */}
+        </Route> */}
+
+        <Route
+         path='/'
+         element={<PrivateRoute element={<Home />} />}
+         />
 
         <Route
           path='/profile'
