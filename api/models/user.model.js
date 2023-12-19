@@ -24,10 +24,4 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema)
 
 
-userSchema.pre("save",function(next){
-   if(!this.isModified("password")) return next()
-   this.password = bcryptjs.hashSync(this.password,10)
-   next()
-})
-
 export default User;
