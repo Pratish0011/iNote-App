@@ -3,6 +3,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import {Link, useNavigate} from "react-router-dom"
 import { signInStart,signInSuccess,signInFailure } from '../redux/userSlice/userSlice'
 import GoogleAuth from '../components/GoogleAuth'
+import {toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
+
+  const options = {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      }
+
 
 
 
@@ -41,6 +56,7 @@ async function handleSubmit(e){
   return;
  }
  dispatch(signInSuccess(data))
+ toast.success("😊Welcome to iNote App!")
  navigate('/')
  } catch (error) {
  dispatch(signInFailure(error.message))

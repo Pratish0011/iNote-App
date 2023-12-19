@@ -64,11 +64,11 @@ async function handleSubmit (e){
   return (
     <div className="max-w-6xl mx-auto bg-myColor mt-10 rounded-lg">
       <div className="p-4">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 ">
           <input
             id="title"
             value={formData.title}
-            className="px-4 py-2 rounded-lg"
+            className="px-4 py-2 rounded-lg focus:outline-none"
             type="text"
             placeholder="Title"
             onChange={handleFormData}

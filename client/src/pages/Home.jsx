@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BiAddToQueue } from "react-icons/bi";
-import { Link } from "react-router-dom";
 import NoteCard from "../components/NoteCard";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Home() {
  
@@ -10,7 +10,7 @@ const {currentUser} = useSelector(state=> state.user)
 console.log(currentUser._id);
 const [noteData, setNoteData] = useState([])
 const [error, setError] = useState(null)
-
+const [searchTerm, setSearchTerm] = useState('')
 
 useEffect(()=>{
 const fetchUserNotes = async()=>{
@@ -32,6 +32,31 @@ fetchUserNotes()
 },[])
 
 
+const handleSearch = async(e)=>{
+  e.preventDefault();
+  try {
+    const url = searchTerm
+      ? `/api/notes/searchNotes/${currentUser._id}?searchTerm=${searchTerm}`
+      : `/api/notes/getNotes/${currentUser._id}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const revData = [...data].reverse();
+    console.log(revData);
+    if (data.success === false) {
+      setError(data.message);
+      return;
+    }
+    setNoteData(revData);
+  } catch (error) {
+    setError(error);
+  }
+
+}
+
+
+
 
 return (
     <>
@@ -43,19 +68,19 @@ return (
       </div>
       </Link>
       <div className="">
-        <form className="flex gap-4">
+        <form className="flex gap-4" onSubmit={handleSearch}>
           <input
             className="py-2 px-2 w-96 rounded-lg bg-myColor"
             type="text"
-            name=""
-            id=""
+            value={searchTerm}
+            onChange={(e)=> setSearchTerm(e.target.value)}
             placeholder="Search Here.."
           />
           <button
             className="py-2 px-2 text-white font-semibold bg-slate-600 rounded-lg"
             type="submit"
           >
-            Filter
+            Search
           </button>
         </form>
       </div>

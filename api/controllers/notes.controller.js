@@ -70,3 +70,27 @@ export const deleteNote = async(req, res, next)=>{
       next(error)
    }
 }
+
+export const getSearchNotes = async (req, res,next) =>{
+   try {
+      const searchterm = req.query.searchTerm
+
+       if(!searchterm){
+         return next(errorHandler(400,"No result found"))
+       }
+
+       if (req.user.id === req.params.id) {
+         const note = await Note.find({
+            userRef: req.params.id,
+           title: { $regex: new RegExp(searchterm, 'i') }
+         })
+  
+           res.status(200).json(note)
+       }else{
+         next(errorHandler(400,"No result found"))
+       }
+
+   } catch (error) {
+      next(error)
+   }
+}

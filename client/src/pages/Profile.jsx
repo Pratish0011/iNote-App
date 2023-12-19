@@ -8,6 +8,22 @@ import {
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+  const options = {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      }
+
+
 
 function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -78,6 +94,7 @@ function Profile() {
       if (data.success === false) {
         dispatch(updateUserFailure(data))
       }
+      toast.success("Updated Successfully")
 
       dispatch(updateUserSuccess(data))
       setEdit(true)
@@ -96,6 +113,7 @@ function Profile() {
         dispatch(signoutUserFailure(data.message))
       }
       dispatch(signoutUserSuccess(data))
+      toast.success("Logged out successfully!")
       navigate('/sign-in')
     } catch (error) {
       dispatch(signoutUserFailure(error.message))

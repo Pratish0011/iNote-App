@@ -2,7 +2,23 @@ import React, { useState } from 'react'
 import {Link, useNavigate} from "react-router-dom"
 import GoogleAuth from '../components/GoogleAuth'
 // import OAuth from '../components/OAuth'
+  import {toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
+
+  const options = {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      }
+
+
+  
 
 function SignUp() {
 
@@ -39,6 +55,7 @@ async function handleSubmit(e){
  }
  setLoading(false)
  setError(null)
+toast.success('🙌User created successfully')
  navigate('/sign-in')
  } catch (error) {
    setLoading(false)
